@@ -17,6 +17,9 @@ import communities from "images/communities.svg";
 import trending from "images/trending.svg";
 import price from "images/price.svg";
 import handshake from "images/handshake.svg";
+
+import { useTranslation } from "react-i18next";
+
 const Container = tw.div`relative`;
 
 const ThreeColumnContainer = styled.div`
@@ -67,31 +70,33 @@ export default ({ cards = null, heading = "¿Por Qué Elegir GreenBloc Gardens?"
    *  If a key for a particular card is not provided, a default value is used
    */
 
+  const { t } = useTranslation();
+
   const defaultCards = [
     {
       imageSrc: lightbulb,
-      title: "Innovación Tecnológica",
-      description: "Nuestra tecnología de vanguardia reduce el consumo de agua y protege el medio ambiente."
+      title: "titleTechInno",
+      description: "descriptionTechInno"
     },
     { imageSrc: grass,
-      title: "Sostenibilidad",
-      description:"Nos comprometemos con la conservación del medio ambiente y la biodiversidad."
+      title:  "titleSustainability",
+      description: "descriptionSustainability"
     },
     { imageSrc: communities,
-       title: "Apoyo a la Comunidad",
-       description: "Somos una startup comprometida con nuestra comunidad local y el cambio positivo."
+       title: "titleCommunity",
+       description: "descriptionCommunity"
        },
     { imageSrc: trending,
-       title: "Soluciones a Medida",
-      description: "Ofrecemos soluciones adaptadas a tus necesidades específicas."
+       title: "titleCustSol",
+      description: "descriptionCustSol"
       },
     { imageSrc: price,
-       title: "Precios Competitivos",
-      description: "Ofrecemos soluciones asequibles sin comprometer la calidad."
+       title: "titleCompPrice",
+      description: "descriptionCompPrice"
       },
     { imageSrc: handshake,
-      title: "Atención Personalizada",
-      description: "Estamos aquí para ti en cada paso del camino, ofreciendo un servicio al cliente excepcional."
+      title: "titlePersoAtte",
+      description: "descriptionPersoAtte"
       }
   ];
 
@@ -100,9 +105,9 @@ export default ({ cards = null, heading = "¿Por Qué Elegir GreenBloc Gardens?"
   return (
     <Container>
       <ThreeColumnContainer>
-        {subheading && <Subheading>{subheading}</Subheading>}
-        <Heading>{heading}</Heading>
-        {description && <Description>{description}</Description>}
+        {subheading && <Subheading>{t('whyUsSubHeading')}</Subheading>}
+        <Heading>{t('whyUsHeading')}</Heading>
+        {description && <Description>{t('whyUsDescription')}</Description>}
         <VerticalSpacer />
         {cards.map((card, i) => (
           <Column key={i}>
@@ -111,9 +116,9 @@ export default ({ cards = null, heading = "¿Por Qué Elegir GreenBloc Gardens?"
                 <img src={card.imageSrc || defaultCardImage} alt="" />
               </span>
               <span className="textContainer">
-                <span className="title">{card.title || "Fully Secure"}</span>
+                <span className="title">{t(card.title) || "Fully Secure"}</span>
                 <p className="description">
-                  {card.description || "Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud."}
+                  {t(card.description) || "Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud."}
                 </p>
               </span>
             </Card>

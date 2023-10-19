@@ -6,6 +6,7 @@ import logo from "../../images/logo.png";
 
 import { ReactComponent as InstagramIcon } from "../../images/icons8-instagram.svg";
 import { ReactComponent as WhatsappIcon } from "../../images/icons8-whatsapp.svg";
+import { useTranslation } from "react-i18next";
 
 const Container = tw(ContainerBase)`bg-gray-900 text-gray-100 -mx-8 -mb-8`;
 const Content = tw.div`max-w-screen-xl mx-auto py-20 lg:py-24`;
@@ -31,6 +32,9 @@ const SocialLink = styled.a`
 const CopyrightText = tw.p`text-center mt-10 font-medium tracking-wide text-sm text-gray-600`;
 
 export default () => {
+
+  const {t} = useTranslation();
+
   return (
     <Container>
       <Content>
@@ -48,7 +52,7 @@ export default () => {
             </SocialLink>
           </SocialLinksContainer>
           <CopyrightText>
-            &copy; Copyright 2023, GreenBloc Gardens. Todos los derechos reservados.
+            &copy; {t('copyRight')}
           </CopyrightText>
         </Row>
       </Content>

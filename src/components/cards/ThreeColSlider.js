@@ -9,6 +9,7 @@ import { ReactComponent as LocationIcon } from "images/water.svg";
 import { ReactComponent as StarIcon } from "feather-icons/dist/icons/star.svg";
 import { ReactComponent as ChevronLeftIcon } from "feather-icons/dist/icons/chevron-left.svg";
 import { ReactComponent as ChevronRightIcon } from "feather-icons/dist/icons/chevron-right.svg";
+import { useTranslation } from "react-i18next";
 
 const Container = tw.div`relative`;
 const Content = tw.div`max-w-screen-xl mx-auto py-16 lg:py-20`;
@@ -27,12 +28,18 @@ const NextButton = tw(ControlButton)``;
 
 const CardSlider = styled(Slider)`
   ${tw`mt-16`}
-  .slick-track { 
-    ${tw`flex`}
+  .slick-track {
+    display: flex;
+    margin: 0 -16px;
   }
   .slick-slide {
     ${tw`h-auto flex justify-center mb-1`}
+    margin: 0 40px;
   }
+  .slick-list {
+    overflow: hidden;
+  }
+  
 `;
 const Card = tw.div`h-full flex! flex-col sm:border max-w-sm sm:rounded-tl-4xl sm:rounded-br-5xl relative focus:outline-none`;
 const CardImage = styled.div(props => [
@@ -67,11 +74,12 @@ const Text = tw.div`ml-2 text-sm font-semibold text-gray-800`;
 
 const PrimaryButton = tw(PrimaryButtonBase)`mt-auto sm:text-lg rounded-none w-full rounded sm:rounded-none sm:rounded-br-4xl py-3 sm:py-6`;
 export default () => {
+  const { t } = useTranslation();
   // useState is used instead of useRef below because we want to re-render when sliderRef becomes available (not null)
   const [sliderRef, setSliderRef] = useState(null);
   const sliderSettings = {
     arrows: false,
-    slidesToShow: 3,
+    slidesToShow: 3, // Mostrar solo una carta a la vez en dispositivos móviles
     responsive: [
       {
         breakpoint: 1280,
@@ -79,11 +87,12 @@ export default () => {
           slidesToShow: 2,
         }
       },
-
       {
         breakpoint: 900,
         settings: {
           slidesToShow: 1,
+          centerMode: true,
+          centerPadding: '15px',
         }
       },
     ]
@@ -93,41 +102,41 @@ export default () => {
   const cards = [
     {
       imageSrc: "https://riegopro.com/blog/wp-content/uploads/2021/05/ventajas-del-riego-enterrado.jpg",
-      title: "Riego por Goteo",
-      description: "Imagina un jardín perfectamente regado, sin zonas secas ni charcos. Con el riego por goteo subterráneo de GreenBloc Gardens, este sueño se convierte en realidad. Este sistema avanzado canaliza el agua directamente a las raíces de tus plantas, asegurando una hidratación óptima y un crecimiento saludable.",
-      locationText: "Riego Sostenible",
+      title: "titleDripIrrigation",
+      description: "descriptionDripIrrigation",
+      locationText: "locationDripIrrigation",
     },
     {
       imageSrc: "https://blogger.googleusercontent.com/img/a/AVvXsEjkY-H_F6OCMXph4jXsZ4n3pGhuq4wEfM6i4aCOdIr_o5N7_5TLkG9xvsxfjUxejuR91YKpZcI_jnfvlpu8BxRrYLB1XQk7-mQA4jvxfCjbgoRn40Z6Cs6C_RSpRxGFhiWzomXSLhPB4jRN8EClBWGDu4TAex1uO62QpG0jTF4Vqi0TUp6lDzKugZbYYg=s16000",
-      title: "Hidrogel",
-      description: "Este avanzado polímero absorbe y retiene el agua en el suelo, liberándola gradualmente para mantener las raíces de tus plantas constantemente hidratadas. Di adiós a las zonas secas y al estrés por el riego constante.",
-      locationText: "Eficiencia Hídrica",
+      title: "titleHydrogel",
+      description: "descriptionHydrogel",
+      locationText: "locationHydrogel",
     },
     {
       imageSrc: "https://www.adslzone.net/app/uploads-adslzone.net/2022/03/diferencias-hardware-software.jpg",
-      title: "Sensores de Suelo",
-      description: "Nuestra tecnología de sensores para césped garantiza un riego eficiente al evaluar continuamente las condiciones del suelo. Esto significa que tu césped recibe agua solo cuando realmente lo necesita, lo que resulta en un césped más saludable y exuberante.",
-      locationText: "Hidratación Inteligente",
+      title: "titleSoilSensors",
+      description: "descriptionSoilSensors",
+      locationText: "locationSoilSensors",
     },
     {
       imageSrc: "https://www.thedigitalspeaker.com/content/images/2023/02/Sustainable-AI-greener-future.jpg",
-      title: "Inteligencia Artificial",
-      description: "Conoce a Greenie, el cerebro detrás de tu jardín. Greenie es nuestra inteligencia artificial personalizada que utiliza datos globales como la temperatura y datos locales, como la humedad del suelo y los niveles de nutrientes, para tomar decisiones inteligentes sobre cuándo activar el riego.",
-      locationText: "Hidratación Inteligente",
+      title: "titleAI",
+      description: "descriptionAI",
+      locationText: "locationAI",
     },
 
     {
       imageSrc: "https://www.movilzona.es/app/uploads-movilzona.es/2021/05/apps-movil.jpg",
-      title: "Aplicación Móvil",
-      description: "Controla tu oasis verde desde la palma de tu mano con nuestra aplicación móvil GreenBloc Gardens. Nuestra aplicación intuitiva te permite monitorear en tiempo real el estado de tu jardín, desde la humedad del suelo hasta el estado de las plantas. Además, podrás hacer un seguimiento de tu gasto recurrente de forma fácil y conveniente, ayudándote a mantener tu jardín de manera eficiente y sostenible.",
-      locationText: "Uso Responsable del Agua",
+      title: "titleMobileApp",
+      description: "descriptionMobileApp",
+      locationText: "locationMobileApp",
     },
 
     {
       imageSrc: "https://www.greatbigstuff.com/cdn/shop/products/umbrella_5-860x860_1200x1200.jpg?v=1576102634",
-      title: "Pastillas Especializadas",
-      description: "Descubre el secreto de jardines exuberantes y saludables con nuestras Pastillas Especializadas GreenBoost Tab. Estas pequeñas maravillas están diseñadas para fortalecer tus plantas, controlar plagas y reducir la necesidad de riego constante. Con GreenBoost Tab, tu jardín estará más resistente y vibrante que nunca, sin complicaciones ni preocupaciones. Simplifica el cuidado de tus plantas y disfruta de un jardín siempre en su mejor forma.",
-      locationText: "Uso Sostenible del Agua",
+      title: "titleSpecializedTablets",
+      description: "descriptionSpecializedTablets",
+      locationText: "locationSpecializedTablets",
     },
   ]
 
@@ -135,7 +144,7 @@ export default () => {
     <Container>
       <Content>
         <HeadingWithControl>
-          <Heading>Soluciones para Todos</Heading>
+          <Heading>{t('headingSolForEverybody')}</Heading>
           <Controls>
             <PrevButton onClick={sliderRef?.slickPrev}><ChevronLeftIcon/></PrevButton>
             <NextButton onClick={sliderRef?.slickNext}><ChevronRightIcon/></NextButton>
@@ -147,7 +156,7 @@ export default () => {
               <CardImage imageSrc={card.imageSrc} />
               <TextInfo>
                 <TitleReviewContainer>
-                  <Title>{card.title}</Title>
+                  <Title>{t(card.title)}</Title>
                   <RatingsInfo>
                   </RatingsInfo>
                 </TitleReviewContainer>
@@ -156,10 +165,10 @@ export default () => {
                     <IconContainer>
                       <LocationIcon />
                     </IconContainer>
-                    <Text>{card.locationText}</Text>
+                    <Text>{t(card.locationText)}</Text>
                   </IconWithText>
                 </SecondaryInfoContainer>
-                <Description>{card.description}</Description>
+                <Description>{t(card.description)}</Description>
               </TextInfo>
             </Card>
           ))}
