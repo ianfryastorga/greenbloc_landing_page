@@ -1,0 +1,15 @@
+.buttonLanguageSpain {
+    background-size: cover; /* Ajusta la imagen para que cubra todo el botón */
+    width: 30px; /* Ancho del botón */
+    height: 30px; /* Altura del botón */
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.buttonLanguageUK {
+    background-size: cover; /* Ajusta la imagen para que cubra todo el botón */
+    width: 30px; /* Ancho del botón */
+    height: 30px; /* Altura del botón */
+    cursor: pointer;
+    border-radius: 5px;
+}

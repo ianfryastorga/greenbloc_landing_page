@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { Link } from "react-scroll";
+import './BackgroundAsImage.css';
 
 import { css } from "styled-components/macro"; //eslint-disable-line
 
 import Header, { NavLink, NavLinks, PrimaryLink, LogoLink, NavToggle, DesktopNavLinks } from "../headers/light.js";
 import ResponsiveVideoEmbed from "../../helpers/ResponsiveVideoEmbed.js";
+import { useTranslation } from "react-i18next";
 
 const StyledHeader = styled(Header)`
-  ${tw`pt-8 max-w-none`}
+  ${tw`pt-8 max-w-none bg-transparent`}
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
   ${DesktopNavLinks} ${NavLink}, ${LogoLink} {
     ${tw`text-gray-100 hover:border-gray-300 hover:text-gray-300`}
   }
@@ -58,14 +62,36 @@ const StyledResponsiveVideoEmbed = styled(ResponsiveVideoEmbed)`
 `;
 
 export default () => {
+
+  const { t, i18n } = useTranslation(); // Accede a t (función de traducción) y i18n (configuración de internacionalización)
+
+  const [isSpanish, setIsSpanish] = useState(true); // Estado inicial en español
+
+  const toggleLanguage = () => {
+    // Cambiar entre español e inglés
+    if (isSpanish) {
+      i18n.changeLanguage("es"); // Cambia a inglés
+    } else {
+      i18n.changeLanguage("en"); // Cambia a español
+    }
+    setIsSpanish(!isSpanish);
+  };
+
+  const languageButton = isSpanish ? (
+    <button onClick={toggleLanguage}>
+      <img src="united_kingdom_flag.jpg" className="buttonLanguageUK"/>
+    </button>
+  ) : (
+    <button onClick={toggleLanguage}>
+      <img src="spain_flag.jpg" className="buttonLanguageSpain"/>
+    </button>
+  );
+
   const navLinks = [
     <NavLinks key={1}>
-        <NavLink href="#">
-          Español
-      </NavLink>
-      <NavLink href="#">
-        English
-      </NavLink>
+      <NavLink href="#">{t('contactUs')}</NavLink>
+      <NavLink href="#">{t('aboutUs')}</NavLink>
+      <NavLink href="#">{languageButton}</NavLink>
     </NavLinks>
   ];
 
@@ -76,25 +102,21 @@ export default () => {
         <StyledHeader links={navLinks} />
         <TwoColumn>
           <LeftColumn>
-            <Notification>Por un planeta más verde, sin comprometer sus recursos.</Notification>
+            <Notification>{t('greenPlanetMessage')}</Notification>
             <Heading>
               <span>GreenBloc Gardens</span>
               <br />
             </Heading>
             <Link
-                  to="features"  // Este debe coincidir con el id de la sección en App.js
-                  smooth={true}  // Activa el desplazamiento suave
-                  duration={500} // Duración de la animación en milisegundos
-                >
-                  <PrimaryAction>Quiero Saber Más</PrimaryAction>
+              to="features"
+              smooth={true}
+              duration={500}
+            >
+              <PrimaryAction>{t('learnMoreButton')}</PrimaryAction>
             </Link>
-
-
-
-
           </LeftColumn>
           <RightColumn>
-          
+            {/* Contenido de la columna derecha */}
           </RightColumn>
         </TwoColumn>
       </HeroContainer>

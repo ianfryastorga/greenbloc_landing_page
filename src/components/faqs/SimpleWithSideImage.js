@@ -6,6 +6,7 @@ import { css } from "styled-components/macro"; //eslint-disable-line
 import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
 import { ReactComponent as PlusIcon } from "feather-icons/dist/icons/plus.svg";
 import { ReactComponent as MinusIcon } from "feather-icons/dist/icons/minus.svg";
+import { useTranslation } from "react-i18next";
 
 const Container = tw.div`relative`;
 const Content = tw.div`max-w-screen-xl mx-auto py-16 lg:py-20`;
@@ -46,45 +47,47 @@ export default ({
   imageShadow = true,
   faqs = null
 }) => {
+
+  const { t } = useTranslation();
   /*
    * You can modify FAQs either by modifying the below defaultFaqs array or by passing a custom array of FAQs using
    * the faqs prop
    */
   const defaultFaqs = [
     {
-      question: "¿Cuándo esperan comenzar a vender sus productos y servicios?",
+      question: "question1",
       answer:
-        "Planeamos lanzar nuestros productos y servicios a mediados de 2024. Estamos trabajando arduamente para asegurarnos de que nuestra oferta sea la mejor para ti cuando llegue ese momento."
+        "answer1"
     },
     {
-      question: "¿Cómo funciona el sistema de riego por goteo subterráneo?",
+      question: "question2",
       answer:
-        "Nuestro sistema de riego por goteo subterráneo canaliza el agua directamente a las raíces de tus plantas, garantizando una hidratación precisa y eficiente. Funciona en conjunto con sensores y tecnología de vanguardia para optimizar el riego según las necesidades de tus plantas y las condiciones climáticas locales."
+        "answer2"
     },
     {
-      question: "¿Qué diferencia a las Pastillas Especializadas GreenBoost Tab de otros productos de jardinería?",
+      question: "question3",
       answer:
-        "Nuestras pastillas están diseñadas para fortalecer tus plantas, controlar plagas y reducir la necesidad de riego constante, todo en uno. Utilizamos una fórmula única respaldada por la ciencia para ofrecer resultados excepcionales y un jardín siempre saludable."
+        "answer3"
     },
     {
-      question: "¿Cómo puedo monitorear y controlar mi sistema de riego y gastos a través de la aplicación móvil?",
+      question: "question4",
       answer:
-        "Con nuestra aplicación móvil, puedes supervisar el estado de tu jardín y el consumo de agua en tiempo real. También puedes ajustar la configuración de riego y recibir notificaciones personalizadas para un control total de tu oasis verde."
+        "answer4"
     },
     {
-      question: "¿Cuál es la vida útil del sistema de riego por goteo subterráneo y las pastillas GreenBoost Tab?",
+      question: "question5",
       answer:
-        "Nuestro sistema de riego y pastillas están diseñados para ser duraderos. La vida útil puede variar según el uso y el mantenimiento, pero puedes esperar que nuestros productos duren varios años con un mantenimiento adecuado (más de 15 años)."
+        "answer5"
     },
     {
-      question: "¿Ofrecen servicios de instalación y mantenimiento para el sistema de riego por goteo subterráneo?",
+      question: "question6",
       answer:
-        "Sí, ofrecemos servicios profesionales de instalación y mantenimiento para garantizar que tu sistema funcione de manera óptima a lo largo del tiempo. Nuestro equipo capacitado se encargará de todo."
+        "answer6"
     },
     {
-      question: "¿Ofrecen garantías para sus productos y servicios?",
+      question: "question7",
       answer:
-        "Sí, respaldamos la calidad de nuestros productos y servicios con garantías sólidas. Si tienes algún problema o inquietud, no dudes en contactarnos y estaremos encantados de resolverlo de manera oportuna."
+        "answer7"
     },
   ];
 
@@ -107,8 +110,8 @@ export default ({
           <Column>
             <FAQContent>
               {subheading ? <Subheading>{subheading}</Subheading> : null}
-              <Heading>{heading}</Heading>
-              <Description>{description}</Description>
+              <Heading>{t('headingFAQs')}</Heading>
+              <Description>{t('descriptionFAQs')}</Description>
               <FAQSContainer>
                 {faqs.map((faq, index) => (
                   <FAQ
@@ -119,7 +122,7 @@ export default ({
                     className="group"
                   >
                     <Question>
-                      <QuestionText>{faq.question}</QuestionText>
+                      <QuestionText>{t(faq.question)}</QuestionText>
                       <QuestionToggleIcon>
                         {activeQuestionIndex === index ? <MinusIcon /> : <PlusIcon />}
                       </QuestionToggleIcon>
@@ -133,7 +136,7 @@ export default ({
                       animate={activeQuestionIndex === index ? "open" : "collapsed"}
                       transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
                     >
-                      {faq.answer}
+                      {t(faq.answer)}
                     </Answer>
                   </FAQ>
                 ))}
